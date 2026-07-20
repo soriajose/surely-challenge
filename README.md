@@ -54,14 +54,23 @@ cd surely-challenge
 ---
 
 ### Paso 2: Inicializar la Base de Datos (MySQL)
-Ejecutá el script de inicialización para crear la base de datos `surelydb`, las tablas y poblar los datos de prueba (usuarios normales, clientes VIP, productos y compras pasadas):
+Ejecutá el script de inicialización para crear la base de datos `surelydb`, las tablas y poblar los datos de prueba:
 
-* **Desde línea de comandos**:
-  ```bash
-  mysql -u root -p < surely-challenge-backend/scripts/schema-and-data-mysql.sql
-  ```
-* **O desde tu cliente SQL preferido (Workbench, DBeaver, etc.)**:  
-  Abrí y ejecutá el archivo `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
+* **Opción A (Recomendada — MySQL Workbench / DBeaver / Cliente Gráfico)**:
+  1. Abrí tu cliente de MySQL (MySQL Workbench, DBeaver, HeidiSQL, etc.).
+  2. Abrí el archivo `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
+  3. Ejecutá todo el script (**Ejecutar ⚡** / Ctrl + Shift + Enter).
+
+* **Opción B (Desde Línea de Comandos / Consola)**:
+  - **Windows (PowerShell)**:
+    ```powershell
+    Get-Content surely-challenge-backend/scripts/schema-and-data-mysql.sql | mysql -u root -p
+    ```
+    *(Nota: Requiere que MySQL esté agregado a las variables de entorno PATH).*
+  - **Linux / macOS (Bash)**:
+    ```bash
+    mysql -u root -p < surely-challenge-backend/scripts/schema-and-data-mysql.sql
+    ```
 
 ---
 
