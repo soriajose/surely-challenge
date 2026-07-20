@@ -1,0 +1,31 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="field">
+    <label for="documentNumber">DNI del cliente</label>
+    <input
+      id="documentNumber"
+      type="text"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="Ej: 30412567"
+      formControlName="documentNumber"
+      [class.field-input--invalid]="documentNumberInvalid"
+      class="field-input"
+    />
+    @if (documentNumberInvalid) {
+      <p class="field-error">Ingresá un DNI válido (6 a 10 dígitos).</p>
+    }
+  </div>
+
+  @if (errorMessage) {
+    <p class="form-error" role="alert">{{ errorMessage }}</p>
+  }
+
+  <button type="submit" class="btn btn--primary" [disabled]="loading">
+    @if (loading) {
+      <span class="btn-spinner" aria-hidden="true"></span>
+      Creando carrito
+    } @else {
+      Crear carrito nuevo
+    }
+  </button>
+</form>

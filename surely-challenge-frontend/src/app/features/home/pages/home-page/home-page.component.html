@@ -1,0 +1,39 @@
+<main class="home">
+  <header class="home-header">
+    <h1>Carrito de compras</h1>
+    <p class="home-subtitle">Iniciá un carrito nuevo con el DNI del cliente, o consultá uno que ya existe.</p>
+  </header>
+
+  <section class="panels">
+    <div class="panel">
+      <h2>Nuevo carrito</h2>
+      <app-create-cart-form
+        [loading]="creating()"
+        [errorMessage]="createError()"
+        (create)="onCreateCart($event)"
+      />
+
+      @if (createdCart(); as cart) {
+        <div class="success-banner" role="status">
+          <p>
+            Carrito <strong>#{{ cart.cartId }}</strong> creado con éxito.
+          </p>
+          <p class="success-banner__hint">Usá ese ID en "Ver carrito" para continuar la compra.</p>
+        </div>
+      }
+    </div>
+
+    <div class="panel">
+      <h2>Consultar un carrito</h2>
+      <app-cart-lookup-form 
+        [loading]="lookingUp()"
+        [errorMessage]="lookupError()"
+        (lookup)="onLookupCart($event)" 
+      />
+    </div>
+  </section>
+
+  <footer class="home-footer">
+    <a routerLink="/reports/top-products" class="link">Ver reporte de productos más comprados</a>
+  </footer>
+</main>

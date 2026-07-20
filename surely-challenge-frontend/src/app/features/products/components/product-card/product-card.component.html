@@ -1,0 +1,22 @@
+<div class="product-card">
+  <div class="product-card__content">
+    <h3 class="product-card__title">{{ product.name }}</h3>
+    <p class="product-card__description">{{ product.description }}</p>
+    <div class="product-card__footer">
+      <span class="product-card__price">{{ product.price | currency }}</span>
+      @if (!disableAdd) {
+        <button 
+          class="btn btn--primary btn--sm" 
+          [disabled]="loading" 
+          (click)="onAdd()"
+        >
+          @if (loading) {
+            <span class="btn-spinner"></span>
+          } @else {
+            Agregar
+          }
+        </button>
+      }
+    </div>
+  </div>
+</div>

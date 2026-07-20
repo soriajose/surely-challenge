@@ -1,0 +1,83 @@
+<div class="store-layout">
+  <main class="store-catalog">
+    <header class="store-header">
+      <div class="store-header__content">
+        <h1>Catálogo de Productos</h1>
+        <button class="btn btn--ghost" routerLink="/">Volver al Inicio</button>
+      </div>
+      @if (errorMessage()) {
+        <div class="alert alert--error" role="alert">
+          {{ errorMessage() }}
+        </div>
+      }
+    </header>
+
+    <section class="store-grid-container">
+      <app-product-list 
+        [products]="products()" 
+        [loadingProducts]="loadingProducts()"
+        [readOnly]="readOnly()"
+        (addToCart)="onAddToCart($event)"
+      />
+    </section>
+  </main>
+
+  <aside class="store-sidebar">
+    <app-cart-sidebar 
+      [cart]="cartState()"
+      [loadingRemoveId]="loadingRemoveId()"
+      [loadingCheckout]="loadingCheckout()"
+      [loadingDelete]="loadingDeleteCart()"
+      [readOnly]="readOnly()"
+      (removeProduct)="onRemoveProduct($event)"
+      (checkoutCart)="onCheckout()"
+      (deleteCart)="onDeleteCart()"
+    />
+  </aside>
+
+  @if (showDeleteModal()) {
+    <div class="modal-backdrop">
+      <div class="modal-dialog" role="dialog" aria-modal="true">
+        <h3 class="modal-title">Eliminar Carrito</h3>
+        <p class="modal-text">¿Estás seguro que deseas vaciar y eliminar tu carrito por completo? Esta acción no se puede deshacer.</p>
+        <div class="modal-actions">
+          <button class="btn btn--ghost" [disabled]="loadingDeleteCart()" (click)="cancelDeleteCart()">Cancelar</button>
+          <button class="btn btn--danger" [disabled]="loadingDeleteCart()" (click)="confirmDeleteCart()">
+            @if (loadingDeleteCart()) {
+              <span class="btn-spinner btn-spinner--sm"></span> Eliminando...
+            } @else {
+              Sí, eliminar
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showCheckoutModal()) {
+    <div class="modal-backdrop">
+      <div class="modal-dialog" role="dialog" aria-modal="true">
+        @if (checkoutSuccess()) {
+          <h3 class="modal-title" style="color: var(--color-accent);">¡Compra Finalizada!</h3>
+          <p class="modal-text">Tu compra se ha procesado con éxito. Gracias por elegirnos.</p>
+          <div class="modal-actions">
+            <button class="btn btn--primary" (click)="closeCheckoutSuccess()">Volver al inicio</button>
+          </div>
+        } @else {
+          <h3 class="modal-title">Finalizar Compra</h3>
+          <p class="modal-text">¿Estás seguro que deseas finalizar tu compra? Ya no podrás modificar este carrito.</p>
+          <div class="modal-actions">
+            <button class="btn btn--ghost" [disabled]="loadingCheckout()" (click)="cancelCheckout()">Cancelar</button>
+            <button class="btn btn--primary" [disabled]="loadingCheckout()" (click)="confirmCheckout()">
+              @if (loadingCheckout()) {
+                <span class="btn-spinner btn-spinner--sm"></span> Procesando...
+              } @else {
+                Sí, finalizar
+              }
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

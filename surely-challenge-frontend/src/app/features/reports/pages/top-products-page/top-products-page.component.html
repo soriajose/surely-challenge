@@ -1,0 +1,67 @@
+<main class="reports-page">
+  <nav class="top-nav">
+    <a routerLink="/" class="btn btn--ghost back-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Volver al inicio
+    </a>
+  </nav>
+
+  <header class="reports-header">
+    <h1 class="reports-title">Tus productos más exclusivos</h1>
+    <p class="reports-subtitle">Consultá los 4 artículos de mayor valor adquiridos en el historial de compras finalizadas.</p>
+  </header>
+
+  <section class="search-section">
+    <form class="form search-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="field">
+        <label for="documentNumber" class="sr-only">DNI del cliente</label>
+        <div class="search-input-group">
+          <input
+            id="documentNumber"
+            type="text"
+            inputmode="numeric"
+            placeholder="Ingresá el número de documento"
+            formControlName="documentNumber"
+            [class.field-input--invalid]="documentInvalid"
+            class="field-input"
+          />
+          <button type="submit" class="btn btn--primary" [disabled]="loading()">
+            @if (loading()) {
+              <span class="btn-spinner btn-spinner--sm"></span>
+            } @else {
+              Consultar historial
+            }
+          </button>
+        </div>
+        @if (documentInvalid) {
+          <p class="field-error">Ingresá un DNI válido.</p>
+        }
+        @if (errorMessage()) {
+          <p class="form-error" style="margin-top: var(--space-2);">{{ errorMessage() }}</p>
+        }
+      </div>
+    </form>
+  </section>
+
+  @if (products(); as productList) {
+    <section class="results-section">
+      @if (productList.length === 0) {
+        <div class="empty-state">
+          <h3>Sin historial de compras</h3>
+          <p>Este cliente no tiene compras finalizadas registradas en el sistema.</p>
+        </div>
+      } @else {
+        <div class="product-list">
+          @for (product of productList; track product.id; let i = $index) {
+            <div class="list-item">
+              <div class="rank-badge">Top {{ i + 1 }}</div>
+              <app-product-card [product]="product" [disableAdd]="true" />
+            </div>
+          }
+        </div>
+      }
+    </section>
+  }
+</main>

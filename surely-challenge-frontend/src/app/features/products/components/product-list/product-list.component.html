@@ -1,0 +1,14 @@
+<div class="product-grid">
+  @for (product of products; track product.id) {
+    <app-product-card 
+      [product]="product" 
+      [loading]="loadingProducts.includes(product.id)"
+      [disableAdd]="readOnly"
+      (addToCart)="onAdd($event)"
+    />
+  } @empty {
+    <div class="product-grid__empty">
+      <p>No hay productos disponibles en este momento.</p>
+    </div>
+  }
+</div>

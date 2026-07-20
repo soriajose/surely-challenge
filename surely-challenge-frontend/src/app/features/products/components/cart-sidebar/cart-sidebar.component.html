@@ -1,0 +1,74 @@
+<aside class="cart-sidebar">
+  <div class="cart-sidebar__header">
+    <h2>Tu Carrito</h2>
+    @if (cart) {
+      <span class="cart-badge">ID: {{ cart.cartId }}</span>
+    }
+  </div>
+
+  <div class="cart-sidebar__content">
+    @if (!cart || cart.items.length === 0) {
+      <div class="cart-empty">
+        <p>Tu carrito está vacío.</p>
+        <p class="cart-empty__sub">¡Agrega algunos productos!</p>
+      </div>
+    } @else {
+      <ul class="cart-items">
+        @for (item of cart.items; track item.productId) {
+          <li class="cart-item">
+            <div class="cart-item__info">
+              <span class="cart-item__name">{{ item.productName }} (x{{ item.quantity }})</span>
+              <span class="cart-item__price">{{ item.subtotal | currency }}</span>
+            </div>
+            @if (!readOnly) {
+              <button
+                class="btn-icon btn-icon--danger"
+                [disabled]="loadingRemoveId === item.productId"
+                (click)="onRemove(item.productId)"
+                aria-label="Eliminar producto"
+              >
+                @if (loadingRemoveId === item.productId) {
+                  <span class="btn-spinner btn-spinner--sm"></span>
+                } @else {
+                  &times;
+                }
+              </button>
+            }
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  <div class="cart-sidebar__footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span class="cart-total__amount">{{ cart?.total || 0 | currency }}</span>
+    </div>
+    @if (!readOnly) {
+      <button
+        class="btn btn--primary btn--full"
+        [disabled]="!cart || cart.items.length === 0 || loadingCheckout"
+        (click)="onCheckout()"
+      >
+        @if (loadingCheckout) {
+          <span class="btn-spinner"></span> Finalizando...
+        } @else {
+          Finalizar Compra
+        }
+      </button>
+      <button
+        class="btn btn--ghost btn--full"
+        style="margin-top: var(--space-3); color: var(--color-danger, #ef4444);"
+        [disabled]="!cart || loadingDelete"
+        (click)="onDelete()"
+      >
+        @if (loadingDelete) {
+          <span class="btn-spinner btn-spinner--sm"></span> Eliminando...
+        } @else {
+          Eliminar Carrito
+        }
+      </button>
+    }
+  </div>
+</aside>

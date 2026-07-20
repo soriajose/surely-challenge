@@ -1,0 +1,129 @@
+
+
+.store-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: var(--space-6);
+  min-height: 100vh;
+  background-color: var(--color-bg);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 300px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 0;
+  }
+}
+
+.store-catalog {
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    padding: var(--space-4);
+  }
+}
+
+.store-header {
+  margin-bottom: var(--space-8);
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    gap: var(--space-4);
+
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+.store-sidebar {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+
+  @media (max-width: 768px) {
+    height: auto;
+    position: static;
+  }
+}
+
+.alert {
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+  font-weight: 500;
+
+  &--error {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+    border: 1px solid var(--color-danger-border);
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.modal-dialog {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--shadow-panel-hover);
+  transform: scale(0.95);
+  animation: scaleUp 0.2s ease-out forwards;
+}
+
+.modal-title {
+  margin-top: 0;
+  font-size: var(--text-xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.modal-text {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-6);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

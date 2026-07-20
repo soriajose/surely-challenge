@@ -1,0 +1,30 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="field">
+    <label for="cartId">ID de carrito</label>
+    <input
+      id="cartId"
+      type="text"
+      inputmode="numeric"
+      autocomplete="off"
+      placeholder="Ej: 104"
+      formControlName="cartId"
+      [class.field-input--invalid]="cartIdInvalid"
+      class="field-input"
+    />
+    @if (cartIdInvalid) {
+      <p class="field-error">Ingresá un ID de carrito numérico.</p>
+    }
+  </div>
+
+  <button type="submit" class="btn btn--ghost" [disabled]="loading">
+    @if (loading) {
+      <span class="btn-spinner"></span> Consultando...
+    } @else {
+      Ver carrito
+    }
+  </button>
+
+  @if (errorMessage) {
+    <p class="form-error" style="margin-top: var(--space-4);">{{ errorMessage }}</p>
+  }
+</form>
