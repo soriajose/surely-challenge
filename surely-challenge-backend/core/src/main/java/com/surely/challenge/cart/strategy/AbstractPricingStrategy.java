@@ -22,7 +22,7 @@ public abstract class AbstractPricingStrategy implements PricingStrategy {
                 .filter(item -> item.getDeletedAt() == null)
                 .mapToInt(CartItem::getQuantity).sum();
 
-        if (totalItems == 10) {
+        if (totalItems >= 10) {
             BigDecimal descuentoTotal = baseTotal.multiply(descuento);
             baseTotal = baseTotal.subtract(descuentoTotal);
         }

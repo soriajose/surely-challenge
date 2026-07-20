@@ -67,10 +67,10 @@ Ejecutá el script de inicialización para crear la base de datos `surelydb`, la
   mysql --default-character-set=utf8mb4 -u root -p < surely-challenge-backend/scripts/schema-and-data-mysql.sql
   ```
 
-* **Alternativa Visual con MySQL Workbench (Sin Terminal)**:
-  1. Abrí MySQL Workbench y conéctate a tu servidor local.
-  2. Seleccioná **File** → **Open SQL Script** → Elegí `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
-  3. Ejecutá todo el script (**Ejecutar ⚡** / `Ctrl + Shift + Enter`).
+* **Alternativa Visual (Cliente Gráfico: DBeaver, Workbench, DataGrip, etc.)**:
+  1. Abrí tu cliente SQL preferido y conéctate a tu servidor MySQL local.
+  2. Abrí el archivo `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
+  3. Ejecutá el script completo.
 
 ---
 
@@ -131,7 +131,3 @@ El script de inicialización (`schema-and-data-mysql.sql`) incluye clientes prec
 4. **Reporte Top 4**:
    - Filtra estrictamente por carritos en estado `CLOSED` del historial del cliente.
 
----
-
-## ✒️ Autor
-* **Jose Soria** — *Desarrollador Backend Java*
