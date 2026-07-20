@@ -110,10 +110,10 @@ El script de inicialización (`schema-and-data-mysql.sql`) incluye clientes prec
 
 | DNI Cliente | Nombre | Tipo de Cliente | Escenario / Prueba que Valida |
 | :--- | :--- | :--- | :--- |
-| **`30412567`** | Juan Pérez | **Común / Normal** | • **Prueba Descuento 10%**: Tiene un carrito abierto (`OPEN`) con 12 productos precargados.<br>• **Prueba Reporte Top 4**: Posee un carrito en estado `CLOSED` con compras pasadas de alto valor. |
-| **`28904511`** | Lucía Fernández | **Cliente VIP** | • **Prueba Beneficios VIP**: Al crear o consultar su carrito, el sistema le asigna automáticamente la estrategia VIP (bonifica el producto más barato + $700 de descuento si tiene >5 ítems).<br>• **Prueba Historial VIP**: Posee un carrito `CLOSED`. |
-| **`35678123`** | Martín Gómez | **Común / Normal** | • **Prueba Creación desde Cero**: Usuario registrado sin carritos activos. Ideal para probar el flujo de "Crear Carrito" y agregar productos manualmente. |
-| **`40123456`** | Sofía Ramírez | **Cliente VIP** | • **Prueba Asignación Automática VIP**: Usuario VIP sin carritos iniciales. Permite verificar que al ingresar su DNI se genere directamente un carrito VIP vaciador. |
+| **`30412567`** | Juan Pérez | **Común / Normal** | • **Prueba Descuento 10%**: Consultar el **ID de Carrito: 1** (tiene 12 productos precargados).<br>• **Prueba Reporte Top 4**: Posee un carrito `CLOSED` con compras pasadas de alto valor (usar DNI). |
+| **`28904511`** | Lucía Fernández | **Cliente VIP** | • **Prueba Beneficios VIP**: Consultar el **ID de Carrito: 2** (el sistema bonifica el producto más barato).<br>• **Prueba Historial VIP**: Posee un carrito `CLOSED`. |
+| **`35678123`** | Martín Gómez | **Común / Normal** | • **Prueba Creación desde Cero**: Usuario registrado sin carritos activos. Ingresa su DNI en "Nuevo Carrito" para probar el flujo desde cero. |
+| **`40123456`** | Sofía Ramírez | **Cliente VIP** | • **Prueba Asignación VIP Automática**: Ingresa su DNI en "Nuevo Carrito" para ver cómo se genera un carrito VIP vacío. |
 
 ---
 
