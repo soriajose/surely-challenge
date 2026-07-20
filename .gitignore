@@ -1,0 +1,23 @@
+# IDEs & System Folders
+.idea/
+.claude/
+.vscode/
+*.swp
+*.DS_Store
+
+# Temporary & Document extraction scratch files
+docx_edit/
+temp_extracted/
+temp_extracted2/
+documento_tecnico_extracted.txt
+documento-tecnico*.docx
+evaluacion*.docx
+extract.ps1
+extracted_text.txt
+temp.zip
+*.log
+
+# Build Outputs & Dependencies (fallback safeguards)
+**/target/
+**/dist/
+**/node_modules/
