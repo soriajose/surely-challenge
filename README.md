@@ -54,31 +54,33 @@ cd surely-challenge
 ---
 
 ### Paso 2: Inicializar la Base de Datos (MySQL)
-Ejecutá el script de inicialización para crear la base de datos `surelydb`, las tablas y poblar los datos de prueba:
+Ejecutá el script de inicialización para crear la base de datos `surelydb`, las tablas y poblar los datos de prueba con soporte UTF-8:
 
-* **Opción A (Recomendada — MySQL Workbench / DBeaver / Cliente Gráfico)**:
-  1. Abrí tu cliente de MySQL (MySQL Workbench, DBeaver, HeidiSQL, etc.).
-  2. Abrí el archivo `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
-  3. Ejecutá todo el script (**Ejecutar ⚡** / Ctrl + Shift + Enter).
+* **Windows (PowerShell)**:
+  ```powershell
+  & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" --default-character-set=utf8mb4 -u root -p -e "source surely-challenge-backend/scripts/schema-and-data-mysql.sql"
+  ```
+  *(Nota: Si tu versión de MySQL difiere de 8.0, ajustá la ruta según corresponda).*
 
-* **Opción B (Desde Línea de Comandos / Consola)**:
-  - **Windows (PowerShell)**:
-    ```powershell
-    Get-Content surely-challenge-backend/scripts/schema-and-data-mysql.sql | mysql -u root -p
-    ```
-    *(Nota: Requiere que MySQL esté agregado a las variables de entorno PATH).*
-  - **Linux / macOS (Bash)**:
-    ```bash
-    mysql -u root -p < surely-challenge-backend/scripts/schema-and-data-mysql.sql
-    ```
+* **Linux / macOS (Bash)**:
+  ```bash
+  mysql --default-character-set=utf8mb4 -u root -p < surely-challenge-backend/scripts/schema-and-data-mysql.sql
+  ```
+
+* **Alternativa Visual con MySQL Workbench (Sin Terminal)**:
+  1. Abrí MySQL Workbench y conéctate a tu servidor local.
+  2. Seleccioná **File** → **Open SQL Script** → Elegí `surely-challenge-backend/scripts/schema-and-data-mysql.sql`.
+  3. Ejecutá todo el script (**Ejecutar ⚡** / `Ctrl + Shift + Enter`).
 
 ---
 
 ### Paso 3: Levantar el Backend (Spring Boot)
 ```bash
 cd surely-challenge-backend
-mvn spring-boot:run
+mvn clean install -DskipTests
+mvn spring-boot:run -pl adapter
 ```
+
 El servidor backend se iniciará en `http://localhost:8080`.
 
 ---
