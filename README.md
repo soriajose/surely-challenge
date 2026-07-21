@@ -75,6 +75,9 @@ Ejecutá el script de inicialización para crear la base de datos `surelydb`, la
 ---
 
 ### Paso 3: Levantar el Backend (Spring Boot)
+> [!NOTE]
+> **Credenciales de Base de Datos:** Por defecto, la API está configurada para conectarse a MySQL con el usuario `root` y contraseña `root`. Si tu motor de base de datos local utiliza credenciales distintas (por ejemplo, contraseña vacía), recordá actualizarlas en el archivo `surely-challenge-backend/adapter/src/main/resources/application.properties` antes de iniciar.
+
 ```bash
 cd surely-challenge-backend
 mvn clean install -DskipTests
